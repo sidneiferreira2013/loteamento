@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="./Template.xhtml"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:define name="content">
+
+
+        <h:form>
+            <p:ajaxStatus onstart="PF('statusDialog').show()" />
+            <p:dialog modal="false" widgetVar="statusDialog"   draggable="false" closable="false"  >
+                <p:graphicImage library="imagens" name="carregando.gif"  />
+            </p:dialog>
+
+            <p:panel>
+
+                <p align="center"> <img src="resources/fotos/LOGO_OFICIAL_PMJM.jpg" width="360" height="180" alt="LOGO_OFICIAL_PMJM"/></p>
+
+                <b:well>
+                    <h3><p align="center" >
+                            Pesquisa de Interesse de Lote Urbano<p/>
+                        </p></h3>
+
+
+
+
+
+
+                    <h4> <p align="center" > <p:commandButton value="Iniciar Cadastro"
+                                                              action="#{pessoaBean.startAdd}" style="background-color: darkcyan"/>
+                        </p></h4><br/><br/>
+
+                  
+
+
+                    <p:messages id="messages" style="font-size: larger" />
+
+                </b:well>
+
+
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
