@@ -5,6 +5,7 @@
  */
 package br.com.loteurbano.entity;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,7 +56,7 @@ public class Pessoa implements java.io.Serializable {
     private String estado;
     private String cep;
 
-    //situação de maradia atual
+   //situação de maradia atual
     private String sit_moradia;
     private String estado_civil;
 
@@ -64,10 +65,12 @@ public class Pessoa implements java.io.Serializable {
 
     //pessoa deficiente na familia
     private String pessoa_deficiente;
-    private Integer rendaFamiliar;
+    private BigDecimal rendaFamiliar;
     
     private String tempo_construção;
-
+    
+    private String aceitotermo;
+    
     public long getId() {
         return id;
     }
@@ -276,11 +279,11 @@ public class Pessoa implements java.io.Serializable {
         this.pessoa_deficiente = pessoa_deficiente;
     }
 
-    public Integer getRendaFamiliar() {
+    public BigDecimal getRendaFamiliar() {
         return rendaFamiliar;
     }
 
-    public void setRendaFamiliar(Integer rendaFamiliar) {
+    public void setRendaFamiliar(BigDecimal rendaFamiliar) {
         this.rendaFamiliar = rendaFamiliar;
     }
 
@@ -291,6 +294,16 @@ public class Pessoa implements java.io.Serializable {
     public void setTempo_construção(String tempo_construção) {
         this.tempo_construção = tempo_construção;
     }
+
+    public String getAceitotermo() {
+        return aceitotermo;
+    }
+
+    public void setAceitotermo(String aceitotermo) {
+        this.aceitotermo = aceitotermo;
+    }
+    
+    
     
     
 
