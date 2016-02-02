@@ -29,24 +29,23 @@ public class Pessoa implements java.io.Serializable {
 
     private String nome;
     private String sexo;
-    private String data_nascimento;
+    private String dt_nasc;
     private String rg;
-    
+
     @CPF
     @Column(name = "cpf", unique = true)
     private String cpf;
-    private String titulo_eleitor;
-    private Integer zona_eleitoral;
+    private Integer t_eleitor;
+    private Integer z_eleitoral;
 
-    private String nome_conjugue;
-    private String sexo_conjugue;
-    private String data_nascimento_conjugue;
+    private String n_conjugue;
+    private String s_conjugue;
+    private String dt_nasc_conjugue;
     private String rg_conjugue;
-    
-    @Column(unique = true)
+
     private String cpf_conjugue;
-    private String titulo_eleitor_conjugue;
-    private Integer zona_eleitoral_conjugue;
+    private Integer t_eleitor_conjugue;
+    private Integer z_eleitoral_conjugue;
 
     private String logradouro;
     private String numero;
@@ -56,21 +55,22 @@ public class Pessoa implements java.io.Serializable {
     private String estado;
     private String cep;
 
-   //situação de maradia atual
+    //situação de maradia atual
     private String sit_moradia;
     private String estado_civil;
 
     //tempo de moradia no municipio
-    private Integer tempo_moradia;
+    private Integer mesesMoradia;
+    private Integer anosMoradia;
 
     //pessoa deficiente na familia
     private String pessoa_deficiente;
     private BigDecimal rendaFamiliar;
-    
+
     private String tempo_construção;
-    
+
     private String aceitotermo;
-    
+
     public long getId() {
         return id;
     }
@@ -95,12 +95,12 @@ public class Pessoa implements java.io.Serializable {
         this.sexo = sexo;
     }
 
-    public String getData_nascimento() {
-        return data_nascimento;
+    public String getDt_nasc() {
+        return dt_nasc;
     }
 
-    public void setData_nascimento(String data_nascimento) {
-        this.data_nascimento = data_nascimento;
+    public void setDt_nasc(String dt_nasc) {
+        this.dt_nasc = dt_nasc;
     }
 
     public String getRg() {
@@ -119,44 +119,44 @@ public class Pessoa implements java.io.Serializable {
         this.cpf = cpf;
     }
 
-    public String getTitulo_eleitor() {
-        return titulo_eleitor;
+    public Integer getT_eleitor() {
+        return t_eleitor;
     }
 
-    public void setTitulo_eleitor(String titulo_eleitor) {
-        this.titulo_eleitor = titulo_eleitor;
+    public void setT_eleitor(Integer t_eleitor) {
+        this.t_eleitor = t_eleitor;
     }
 
-    public Integer getZona_eleitoral() {
-        return zona_eleitoral;
+    public Integer getZ_eleitoral() {
+        return z_eleitoral;
     }
 
-    public void setZona_eleitoral(Integer zona_eleitoral) {
-        this.zona_eleitoral = zona_eleitoral;
+    public void setZ_eleitoral(Integer z_eleitoral) {
+        this.z_eleitoral = z_eleitoral;
     }
 
-    public String getNome_conjugue() {
-        return nome_conjugue;
+    public String getN_conjugue() {
+        return n_conjugue;
     }
 
-    public void setNome_conjugue(String nome_conjugue) {
-        this.nome_conjugue = nome_conjugue;
+    public void setN_conjugue(String n_conjugue) {
+        this.n_conjugue = n_conjugue;
     }
 
-    public String getSexo_conjugue() {
-        return sexo_conjugue;
+    public String getS_conjugue() {
+        return s_conjugue;
     }
 
-    public void setSexo_conjugue(String sexo_conjugue) {
-        this.sexo_conjugue = sexo_conjugue;
+    public void setS_conjugue(String s_conjugue) {
+        this.s_conjugue = s_conjugue;
     }
 
-    public String getData_nascimento_conjugue() {
-        return data_nascimento_conjugue;
+    public String getDt_nasc_conjugue() {
+        return dt_nasc_conjugue;
     }
 
-    public void setData_nascimento_conjugue(String data_nascimento_conjugue) {
-        this.data_nascimento_conjugue = data_nascimento_conjugue;
+    public void setDt_nasc_conjugue(String dt_nasc_conjugue) {
+        this.dt_nasc_conjugue = dt_nasc_conjugue;
     }
 
     public String getRg_conjugue() {
@@ -175,20 +175,20 @@ public class Pessoa implements java.io.Serializable {
         this.cpf_conjugue = cpf_conjugue;
     }
 
-    public String getTitulo_eleitor_conjugue() {
-        return titulo_eleitor_conjugue;
+    public Integer getT_eleitor_conjugue() {
+        return t_eleitor_conjugue;
     }
 
-    public void setTitulo_eleitor_conjugue(String titulo_eleitor_conjugue) {
-        this.titulo_eleitor_conjugue = titulo_eleitor_conjugue;
+    public void setT_eleitor_conjugue(Integer t_eleitor_conjugue) {
+        this.t_eleitor_conjugue = t_eleitor_conjugue;
     }
 
-    public Integer getZona_eleitoral_conjugue() {
-        return zona_eleitoral_conjugue;
+    public Integer getZ_eleitoral_conjugue() {
+        return z_eleitoral_conjugue;
     }
 
-    public void setZona_eleitoral_conjugue(Integer zona_eleitoral_conjugue) {
-        this.zona_eleitoral_conjugue = zona_eleitoral_conjugue;
+    public void setZ_eleitoral_conjugue(Integer z_eleitoral_conjugue) {
+        this.z_eleitoral_conjugue = z_eleitoral_conjugue;
     }
 
     public String getLogradouro() {
@@ -263,13 +263,23 @@ public class Pessoa implements java.io.Serializable {
         this.estado_civil = estado_civil;
     }
 
-    public Integer getTempo_moradia() {
-        return tempo_moradia;
+    public Integer getMesesMoradia() {
+        return mesesMoradia;
     }
 
-    public void setTempo_moradia(Integer tempo_moradia) {
-        this.tempo_moradia = tempo_moradia;
+    public void setMesesMoradia(Integer mesesMoradia) {
+        this.mesesMoradia = mesesMoradia;
     }
+
+    public Integer getAnosMoradia() {
+        return anosMoradia;
+    }
+
+    public void setAnosMoradia(Integer anosMoradia) {
+        this.anosMoradia = anosMoradia;
+    }
+
+    
 
     public String getPessoa_deficiente() {
         return pessoa_deficiente;
@@ -302,10 +312,6 @@ public class Pessoa implements java.io.Serializable {
     public void setAceitotermo(String aceitotermo) {
         this.aceitotermo = aceitotermo;
     }
-    
-    
-    
-    
 
     @Override
     public int hashCode() {
@@ -333,7 +339,4 @@ public class Pessoa implements java.io.Serializable {
         return true;
     }
 
-    
-    
-    
 }

@@ -26,29 +26,13 @@ public class PessoaDao {
             session.beginTransaction();
             session.save(ps);
             session.getTransaction().commit();
+            
 
-        } catch (PersistenceException e) {
-            Throwable t = e;
-            boolean cont = true;
-            while (t != null) {
-                if (t.getMessage().startsWith("Duplicate entry")) {
-                    cont = false;
-                    throw new Exception("Duplicate entry");
-                }
-                t = t.getCause();
-            }
-            if (cont) {
-                throw new Exception(e.getMessage());
-            }
         } finally {
             session.close();
 
         }
     }
-
-
-
-
 
 
 public void update(Pessoa ps) {

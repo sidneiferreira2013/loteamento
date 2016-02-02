@@ -15,6 +15,7 @@
     
     
     
+    
     <mapping class="br.com.loteurbano.entity.Pessoa"/>
   </session-factory>
 </hibernate-configuration>

@@ -12,55 +12,51 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-
-
 /**
  *
  * @author Sidnei
  */
 @ManagedBean
 @SessionScoped
-public class PessoaBean implements java.io.Serializable{
-    
+public class PessoaBean implements java.io.Serializable {
+
     Pessoa pessoa;
     PessoaDao pessoaDao = new PessoaDao();
-    
-    
-    public PessoaBean(){
-        
+
+    public PessoaBean() {
+
         pessoa = new Pessoa();
     }
-    
-    
-    public String startAdd(){
+
+    public String startAdd() {
         pessoa = new Pessoa();
         return "cadastramento.xhtml";
     }
-    
-  public String cadastar() {
+
+    public String cadastar() throws Exception {
+
         try {
             pessoaDao.salvar(pessoa);
-            FacesMessage faces = new FacesMessage("Cadastro efetuado com Successo!");
+            FacesMessage faces = new FacesMessage(" Seu cadastro foi realizado com Successo!");
             FacesContext contexto = FacesContext.getCurrentInstance();
             contexto.addMessage(null, faces);
             return "index.xhtml";
 
         } catch (Exception e) {
-            if (e.getMessage().trim().startsWith("Duplicate entry")) {
-                FacesMessage faces = new FacesMessage("Cpf está repetido!");
-            }
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "CPF já cadastrado!", "Contact admin."));
+            return "index.xhtml";
+            
         }
-        return "index.xhtml";
+
     }
-  
-  public void validarCptcha() {
+
+    public void validarCptcha() {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correct", "Correct");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
-    
-    
-     public void encontraCEP() {
+
+    public void encontraCEP() {
         CepWebService cepWebService = new CepWebService(pessoa.getCep());
 
         if (cepWebService.getResultado() == 1) {
@@ -94,8 +90,5 @@ public class PessoaBean implements java.io.Serializable{
     public void setPessoaDao(PessoaDao pessoaDao) {
         this.pessoaDao = pessoaDao;
     }
-    
-    
-    
-    
+
 }

@@ -8,30 +8,30 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="/css/default.css"/>
-        <h:outputStylesheet name="/css/cssLayout.css"/>
+        <h:outputStylesheet name="css/default.css"/>
+        <h:outputStylesheet name= "css/cssLayout.css"/>
 
         <title>Cadastramento Lote Urbano</title>
 
-      
-
     </h:head>
-
-
 
     <f:view encoding="ISO-8859-1">
 
         <h:body>
-            <h:form style="align-items: center" >
-
-
-                <div id="top" class="top">
+            <h:form>
+                <div id="top" class="top" style="background-color: #ffffff">
                     <ui:insert name="top">
                     </ui:insert>
                 </div>
 
-                <div id="content" class="center_content">
+                <div id="content" class="center_content" >
                     <ui:insert name="content"></ui:insert>
+                </div>
+
+
+
+                <div id="bottom" style="position: absolute;bottom: 0; background-color: #AFAFAF">
+                    <ui:insert name="bottom">Copyright © 2016 Todos os direitos reservados. WEB JEY SISTEMAS </ui:insert>
                 </div>
 
             </h:form>

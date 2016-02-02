@@ -23,4 +23,25 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/erro.xhtml</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/erro.jsf</location>
+    </error-page>
+    
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/erro.xhtml</location>
+    </error-page>
+    
+    
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>thema-jquery</param-value>
+    </context-param>
 </web-app>
