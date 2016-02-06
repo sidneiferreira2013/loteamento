@@ -87,23 +87,41 @@
                              size="9" styleClass="fctValidaData" requiredMessage="Campo Data de Nascimento não preenchido" />
 
                 <p:outputLabel value="Sexo" for="sexo" style="font-size: large" />
-                <p:selectOneMenu id="sexo"  value="#{pessoaBean.pessoa.sexo}"
+                <h:selectOneMenu id="sexo"  value="#{pessoaBean.pessoa.sexo}"
                                  required="true" requiredMessage="Sexo não selecionado!" >
                     <f:selectItem itemLabel="Selecione" itemValue=""  />
                     <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
                     <f:selectItem itemLabel="Ferminino" itemValue="Ferminino" />
-                </p:selectOneMenu>
+                </h:selectOneMenu>
 
 
                 <p:outputLabel for="titulo_eleitor" value="Título de Eleitor" style="font-size: large" />
-                <p:inputMask mask="999999999" id="titulo_eleitor" value="#{pessoaBean.pessoa.t_eleitor}" 
+                <p:inputMask mask="999999999999" id="titulo_eleitor" value="#{pessoaBean.pessoa.t_eleitor}" 
                              required="true" requiredMessage="Campo Titulo de Eleitor não preenchido"    >
                 </p:inputMask>
 
                 <p:outputLabel for="zona_eleitoral" value="Zona Eleitoral"  style="font-size: large"/>
                 <p:inputText id="zona_eleitoral" required="true" value="#{pessoaBean.pessoa.z_eleitoral}"
-                             size="6" requiredMessage="Campo Zona Eleitoral não preenchido">
+                             size="6" requiredMessage="Campo Zona Eleitoral não preenchido" maxlength="3" >
                 </p:inputText>
+
+            </h:panelGrid>
+            <br/>
+
+
+            <h:panelGrid columns="4" cellpadding="4">
+
+                <p:outputLabel value="Estado Civil" for="estadoCivil"/>
+                <h:selectOneMenu id="estadoCivil"  value="#{pessoaBean.pessoa.estado_civil}"
+                                 required="true"  requiredMessage="Estado civil não selecionado!">
+
+                    <f:selectItem itemLabel="Selecione" itemValue=""  />
+                    <f:selectItem itemLabel="Solteiro(a)" itemValue="Solteiro(a)" />
+                    <f:selectItem itemLabel="Casado(a)" itemValue="Casado(a)" />
+                    <f:selectItem itemLabel="Separado(a)" itemValue="Separado(a)" />
+                    <f:selectItem itemLabel="Divorciado(a)" itemValue="Divorciado(a)" />
+                    <f:selectItem itemLabel="Amasiado(a)" itemValue="Amasiado(a)" />
+                </h:selectOneMenu>
 
             </h:panelGrid>
 
@@ -117,26 +135,26 @@
 
                 <p:outputLabel for="nome_companheira" value="Nome" style="font-size: large; page-break-after: " />
 
-                <p:inputText id="nome_companheira" label="nome_compaheira"  value="#{pessoaBean.pessoa.n_conjugue}"
+                <p:inputText id="nome_companheira" label="nome_compaheira"  value="#{pessoaBean.pessoa.n_conjuge}"
                              size="30" autocomplete="true"   />
 
                 <p:outputLabel for="rg_companheira" value="RG"  style="font-size: large"/>
                 <p:inputMask id="rg_companheira" label="rg" mask="99.999.999-9"
-                             value="#{pessoaBean.pessoa.rg_conjugue}" size="12">
+                             value="#{pessoaBean.pessoa.rg_conjuge}" size="12">
                 </p:inputMask>
 
                 <p:outputLabel for="cpf_companheira" value="CPF" style="font-size: large" />
                 <p:inputMask id="cpf_companheira" label="cpf" mask="999.999.999-99"
-                             value="#{pessoaBean.pessoa.cpf_conjugue}" size="14" >
+                             value="#{pessoaBean.pessoa.cpf_conjuge}" size="14" >
                 </p:inputMask>
 
                 <p:outputLabel for="datanascimento_companheira" value="Dt.Nasc."  style="font-size: large"/>
                 <p:inputMask id="datanascimento_companheira" mask="99/99/9999"  
-                             value="#{pessoaBean.pessoa.dt_nasc_conjugue}" 
+                             value="#{pessoaBean.pessoa.dtNasc_conjugue}" 
                              requiredMessage="Campo Dt. Nascimento  não preenchido ou inválido!" size="9"/>
 
                 <p:outputLabel value="Sexo" for="sexo_companheira" style="font-size: large" />
-                <h:selectOneMenu id="sexo_companheira"  value="#{pessoaBean.pessoa.s_conjugue}">
+                <h:selectOneMenu id="sexo_companheira"  value="#{pessoaBean.pessoa.sexo_conjuge}">
 
                     <f:selectItem itemLabel="Selecione" itemValue=""  />
                     <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
@@ -147,13 +165,15 @@
 
 
 
-                <p:outputLabel for="titulo_eleitor_companheira" value="Título de Eleitor" style="font-size: large" />
-                <p:inputText id="titulo_eleitor_companheira" value="#{pessoaBean.pessoa.t_eleitor_conjugue}" maxlength="12" />
-              
+                <p:outputLabel for="titulo_eleitor2" value="Título de Eleitor" style="font-size: large" />
+                <p:inputMask mask="999999999999" id="titulo_eleitor2" value="#{pessoaBean.pessoa.t_eleitor_conjuge}" 
+                             >
+                </p:inputMask>
 
-                <p:outputLabel for="zona_eleitoral_companheira" value="Zona Eleitoral"  style="font-size: large"/>
-                <p:inputText id="zona_eleitoral_companheira" value="#{pessoaBean.pessoa.z_eleitoral_conjugue}" size="6" />
-                
+                <p:outputLabel for="zona_eleitoral2" value="Zona Eleitoral"  style="font-size: large"/>
+                <p:inputText id="zona_eleitoral2"  value="#{pessoaBean.pessoa.z_eleitoral_conjuge}"
+                             size="6"  maxlength="3" >
+                </p:inputText>
 
 
             </h:panelGrid>
@@ -163,13 +183,13 @@
             <h:panelGrid columns="4" cellpadding="4" >
 
                 <p:outputLabel value="Rua"  style="font-size: large" />
-                <p:inputText size="30" value="#{pessoaBean.pessoa.logradouro}" required="true" onkeypress="mascara(this, execmascara);"
+                <p:inputText size="30" value="#{pessoaBean.pessoa.logradouro}"  onkeypress="mascara(this, execmascara);"
                              requiredMessage="Compo Rua não preenchido"/>
 
 
                 <p:outputLabel value="N°:"  style="font-size: large"/>
                 <p:inputText size="4" value="#{pessoaBean.pessoa.numero}"
-                             required="true"  requiredMessage="Compo Nº não preenchido" />
+                             requiredMessage="Compo Nº não preenchido" />
 
                 <p:outputLabel for="complemento" value="Complemento:"  style="font-size: large"/>
                 <p:inputText id="complemento" size="12" value="#{pessoaBean.pessoa.complemento}" />
@@ -177,22 +197,41 @@
 
                 <p:outputLabel value="Bairro:"  style="font-size: large"/>
                 <p:inputText size="18" value="#{pessoaBean.pessoa.bairro}"
-                             requiredMessage="Compo Bairro não preenchido" required="true"/>
+                             requiredMessage="Compo Bairro não preenchido" />
 
 
                 <p:outputLabel value="Cidade:"  style="font-size: large"/>
-                <p:inputText size="20" value="#{pessoaBean.pessoa.cidade}" required="true"
+                <p:inputText size="20" value="#{pessoaBean.pessoa.cidade}" 
                              requiredMessage="Compo Cidade não preenchido"/>
 
 
                 <p:outputLabel value="Estado"  style="font-size: large"/>
-                <p:inputMask mask="aa" size="2" value="#{pessoaBean.pessoa.estado}" required="true"  requiredMessage="Compo Estado não preenchido" />
+                <p:inputMask mask="SP" size="2" value="#{pessoaBean.pessoa.estado}" requiredMessage="Compo Estado não preenchido" />
 
                 <p:outputLabel for="cep" value="CEP:"  style="font-size: large"/>
                 <p:inputMask id="cep" mask="99999-999" value="#{pessoaBean.pessoa.cep}"  size="7" 
-                             required="true"  requiredMessage="Compo Cep não preenchido">
+                             requiredMessage="Compo Cep não preenchido">
                     <p:ajax listener="#{pessoaFisicaBean.encontraCEP}"  event="change"  process="@this"/>
                 </p:inputMask>
+            </h:panelGrid>
+
+
+            <br/>
+
+            <h:panelGrid  columns="2" cellpadding="4" style="font-size: large" >
+
+
+
+                <p:outputLabel for="telefone" value="Telefone fixo" />
+                <p:inputMask size="13" mask="(99) 9999-9999" id="telefone" value="#{pessoaBean.pessoa.telefoneFixo}" /> 
+
+                <p:outputLabel for="telefone2" value="Telefone celular" />
+                <p:inputMask size="13" mask="(99) 99999-9999" id="telefone2"  requiredMessage="Telefone Celular não preenchido"
+                             value="#{pessoaBean.pessoa.telefoneCelular}" /> 
+
+                <p:outputLabel for="telefone3" value="Telefone recado" />
+                <p:inputMask size="13" mask="(99) 99999-9999" id="telefone3" value="#{pessoaBean.pessoa.telefoneRecado}" /> 
+
 
             </h:panelGrid>
 
@@ -202,7 +241,7 @@
 
                 <p:outputLabel for="moradiaAtual" value="Situação de moradia atual" />
                 <h:selectOneMenu id="moradiaAtual"  value="#{pessoaBean.pessoa.sit_moradia}"  style="width:320px;"
-                                 required="true" requiredMessage="Tipo de moradia não selecionado!" >
+                                 requiredMessage="Tipo de moradia não selecionado!" >
 
                     <f:selectItem itemLabel="Selecione" itemValue=""  />
                     <f:selectItem itemLabel="Mora de aluguel" itemValue="Mora de aluguel" />
@@ -215,28 +254,34 @@
                 </h:selectOneMenu>
 
 
-                <p:outputLabel value="Estado Civil" for="estadoCivil"/>
-                <h:selectOneMenu id="estadoCivil"  value="#{pessoaBean.pessoa.estado_civil}"
-                                 required="true"  requiredMessage="Estado civil não selecionado!">
 
-                    <f:selectItem itemLabel="Selecione" itemValue=""  />
-                    <f:selectItem itemLabel="Solteiro(a)" itemValue="Solteiro(a)" />
-                    <f:selectItem itemLabel="Casado(a)" itemValue="Casado(a)" />
-                    <f:selectItem itemLabel="Separado(a)" itemValue="Separado(a)" />
-                    <f:selectItem itemLabel="Divorciado(a)" itemValue="Divorciado(a)" />
-                    <f:selectItem itemLabel="Amasiado(a)" itemValue="Amasiado(a)" />
-
-
-                </h:selectOneMenu>
 
             </h:panelGrid><br/>
 
             <h:panelGrid columns="2" cellpadding="4" style="font-size: large">
 
+                <p:outputLabel for="pessoas" value="Quantas pessoas moram atualmente na casa ?" />
+                <p:inputText id="pessoas" size="2" maxlength="2" style="width: 50px" />
+
+                <p:outputLabel for="filhos" value="Quando filhos você tem ?" />
+                <p:inputText id="filhos"  maxlength="2" style="width: 50px" />
+
+                <p:outputLabel for="anos" value="Quantos anos mora em Júlio Mesquita?" />
+                <p:inputText id="anos"  style="width: 50px" maxlength="2" value="#{pessoaBean.pessoa.tempoMoradia}"
+                             requiredMessage="Compo Quantos anos mora em Júlio Mesquita não preenchido" />
+
+
+                <p:outputLabel value="Valor da renda familiar" for="renda" />
+                <p:inputText id="renda" size="7" value="#{pessoaBean.pessoa.rendaFamiliar}" onkeypress="mascara(this, moeda);"
+                             maxlength="9" requiredMessage="Campo renda familar não preenchido">
+
+                    <f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"  pattern="#,##0.00"  />
+
+                </p:inputText>
 
                 <p:outputLabel value="Possui pessoa deficiente na família ?" for="deficiencia" />
                 <p:selectOneRadio value="#{pessoaBean.pessoa.pessoa_deficiente}" id="deficiencia" 
-                                  rendered="true" layout="pageDirection" required="true"  requiredMessage="Compo deficiente na familia não preenchido" >
+                                  rendered="true" layout="pageDirection"   requiredMessage="Compo deficiente na familia não preenchido" >
                     <f:selectItem itemLabel="Não" itemValue="Nao  " />
                     <f:selectItem itemLabel="Sim" itemValue="Sim " />
 
@@ -244,44 +289,15 @@
             </h:panelGrid>
 
 
-            <h4>Quantos tempo mora em Júlio Mesquita? </h4>
-
-            <h:panelGrid columns="3" cellpadding="4" style=" font-size: large">
-
-                <p:outputLabel value="Anos" for="anos" />
-                <p:inputMask mask="99" id="meses" value="#{pessoaBean.pessoa.mesesMoradia}" style="width: 50px"
-                             required="true"  requiredMessage="Compo Quantos anos mora em Júlio Mesquita não preenchido" />
-                <p:outputLabel value="Ex. 05 "/>
-
-                <p:outputLabel value="Meses"  for="meses" />
-                <p:inputMask mask="99" id="anos" value="#{pessoaBean.pessoa.anosMoradia}" style="width: 50px"
-                             required="true"  requiredMessage="Compo Quantos anos mora em Júlio Mesquita não preenchido" />
-                <p:outputLabel value="Ex. 05 "/>
-
-            </h:panelGrid>
-
-
 
             <br/><br/>
-
-            <h:panelGrid style="font-size: large" columns="2" cellpadding="5">
-
-                <p:outputLabel value="Valor da renda familiar" for="renda" />
-                <p:inputText id="renda" size="7" value="#{pessoaBean.pessoa.rendaFamiliar}" onkeypress="mascara(this, moeda);"
-                             required="true" maxlength="9" requiredMessage="Campo renda familar não preenchido">
-
-                    <f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"  pattern="#,##0.00"  />
-
-                </p:inputText>
-            </h:panelGrid>
-
 
 
             <h:panelGrid style="font-size: large" columns="2" cellpadding="5">
 
                 <p:outputLabel for="construcao" value="Em quanto tempo pretende iniciar a construção no terreno ?" 
                                style="margin-bottom:20px" />
-                <h:selectOneMenu value="#{pessoaBean.pessoa.tempo_construção}" id="construcao" required="true"
+                <h:selectOneMenu value="#{pessoaBean.pessoa.tempo_construção}" id="construcao" 
                                  requiredMessage="Selecione tempo de construção" >
 
                     <f:selectItem itemLabel="Selecione" itemValue=""  />
@@ -307,7 +323,7 @@
                 <p:outputLabel value="Declaro que todas as informações contidas nesse formulário são verdadeiras."
                                for="termo" />
                 <p:selectOneRadio value="#{pessoaBean.pessoa.aceitotermo}" id="termo" 
-                                  rendered="true" layout="pageDirection" required="true" requiredMessage="Campo aceite do termo não marcado" >
+                                  rendered="true" layout="pageDirection"  requiredMessage="Campo aceite do termo não marcado" >
                     <f:selectItem itemLabel="" itemValue="Sim " />
 
                 </p:selectOneRadio>
@@ -315,15 +331,12 @@
 
             <br/><br/><br/>
 
-            <p:commandButton value="Salvar" action="#{pessoaBean.cadastar}" 
+            <p:commandButton   value="Salvar" action="#{pessoaBean.cadastar}" 
 
-                             ajax="false" style="color: #D20005" icon="ui-icon-disk"/>
+                               ajax="false" style="color: #D20005" icon="ui-icon-disk"/>
 
             <p:commandButton value="Voltar" action="index" ajax="false"
                              immediate="true" icon="ui-icon-home"/>
-
-
-
 
 
 
@@ -332,15 +345,11 @@
         <br/><br/>
 
 
-        <p:ajaxStatus onstart="statusDialog.show();"
-                      onsuccess="statusDialog.hide();"/>
-        <p:dialog modal="true" widgetVar="statusDialog" header="Carregango! Aguarde..."
-                  draggable="false" closable="false">
-            <p:graphicImage library="imagens" name="carregando.gif" />
-        </p:dialog>
-
-
-
+        <div id="bottom" style="background-color: #ffffff; width: 100%" >
+            <ui:insert name="bottom">Copyright © 2016 Todos os direitos reservados. WEB JEY SISTEMAS </ui:insert>
+        </div>
     </ui:define>
+
+
 
 </ui:composition>

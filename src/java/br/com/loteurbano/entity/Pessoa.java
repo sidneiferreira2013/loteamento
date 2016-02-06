@@ -33,19 +33,18 @@ public class Pessoa implements java.io.Serializable {
     private String rg;
 
     @CPF
-    @Column(name = "cpf", unique = true)
     private String cpf;
-    private Integer t_eleitor;
+    private Double t_eleitor;
     private Integer z_eleitoral;
 
-    private String n_conjugue;
-    private String s_conjugue;
-    private String dt_nasc_conjugue;
-    private String rg_conjugue;
+    private String n_conjuge;
+    private String sexo_conjuge;
+    private String dtNasc_conjugue;
+    private String rg_conjuge;
 
-    private String cpf_conjugue;
-    private Integer t_eleitor_conjugue;
-    private Integer z_eleitoral_conjugue;
+    private String cpf_conjuge;
+    private Integer t_eleitor_conjuge;
+    private Integer z_eleitoral_conjuge;
 
     private String logradouro;
     private String numero;
@@ -60,8 +59,7 @@ public class Pessoa implements java.io.Serializable {
     private String estado_civil;
 
     //tempo de moradia no municipio
-    private Integer mesesMoradia;
-    private Integer anosMoradia;
+    private Integer tempoMoradia;
 
     //pessoa deficiente na familia
     private String pessoa_deficiente;
@@ -70,6 +68,10 @@ public class Pessoa implements java.io.Serializable {
     private String tempo_construção;
 
     private String aceitotermo;
+
+    private String telefoneFixo;
+    private String telefoneCelular;
+    private String telefoneRecado;
 
     public long getId() {
         return id;
@@ -119,11 +121,11 @@ public class Pessoa implements java.io.Serializable {
         this.cpf = cpf;
     }
 
-    public Integer getT_eleitor() {
+    public Double getT_eleitor() {
         return t_eleitor;
     }
 
-    public void setT_eleitor(Integer t_eleitor) {
+    public void setT_eleitor(Double t_eleitor) {
         this.t_eleitor = t_eleitor;
     }
 
@@ -135,60 +137,60 @@ public class Pessoa implements java.io.Serializable {
         this.z_eleitoral = z_eleitoral;
     }
 
-    public String getN_conjugue() {
-        return n_conjugue;
+    public String getN_conjuge() {
+        return n_conjuge;
     }
 
-    public void setN_conjugue(String n_conjugue) {
-        this.n_conjugue = n_conjugue;
+    public void setN_conjuge(String n_conjuge) {
+        this.n_conjuge = n_conjuge;
     }
 
-    public String getS_conjugue() {
-        return s_conjugue;
+    public String getSexo_conjuge() {
+        return sexo_conjuge;
     }
 
-    public void setS_conjugue(String s_conjugue) {
-        this.s_conjugue = s_conjugue;
+    public void setSexo_conjuge(String sexo_conjuge) {
+        this.sexo_conjuge = sexo_conjuge;
     }
 
-    public String getDt_nasc_conjugue() {
-        return dt_nasc_conjugue;
+    public String getDtNasc_conjugue() {
+        return dtNasc_conjugue;
     }
 
-    public void setDt_nasc_conjugue(String dt_nasc_conjugue) {
-        this.dt_nasc_conjugue = dt_nasc_conjugue;
+    public void setDtNasc_conjugue(String dtNasc_conjugue) {
+        this.dtNasc_conjugue = dtNasc_conjugue;
     }
 
-    public String getRg_conjugue() {
-        return rg_conjugue;
+    public String getRg_conjuge() {
+        return rg_conjuge;
     }
 
-    public void setRg_conjugue(String rg_conjugue) {
-        this.rg_conjugue = rg_conjugue;
+    public void setRg_conjuge(String rg_conjuge) {
+        this.rg_conjuge = rg_conjuge;
     }
 
-    public String getCpf_conjugue() {
-        return cpf_conjugue;
+    public String getCpf_conjuge() {
+        return cpf_conjuge;
     }
 
-    public void setCpf_conjugue(String cpf_conjugue) {
-        this.cpf_conjugue = cpf_conjugue;
+    public void setCpf_conjuge(String cpf_conjuge) {
+        this.cpf_conjuge = cpf_conjuge;
     }
 
-    public Integer getT_eleitor_conjugue() {
-        return t_eleitor_conjugue;
+    public Integer getT_eleitor_conjuge() {
+        return t_eleitor_conjuge;
     }
 
-    public void setT_eleitor_conjugue(Integer t_eleitor_conjugue) {
-        this.t_eleitor_conjugue = t_eleitor_conjugue;
+    public void setT_eleitor_conjuge(Integer t_eleitor_conjuge) {
+        this.t_eleitor_conjuge = t_eleitor_conjuge;
     }
 
-    public Integer getZ_eleitoral_conjugue() {
-        return z_eleitoral_conjugue;
+    public Integer getZ_eleitoral_conjuge() {
+        return z_eleitoral_conjuge;
     }
 
-    public void setZ_eleitoral_conjugue(Integer z_eleitoral_conjugue) {
-        this.z_eleitoral_conjugue = z_eleitoral_conjugue;
+    public void setZ_eleitoral_conjuge(Integer z_eleitoral_conjuge) {
+        this.z_eleitoral_conjuge = z_eleitoral_conjuge;
     }
 
     public String getLogradouro() {
@@ -263,23 +265,13 @@ public class Pessoa implements java.io.Serializable {
         this.estado_civil = estado_civil;
     }
 
-    public Integer getMesesMoradia() {
-        return mesesMoradia;
+    public Integer getTempoMoradia() {
+        return tempoMoradia;
     }
 
-    public void setMesesMoradia(Integer mesesMoradia) {
-        this.mesesMoradia = mesesMoradia;
+    public void setTempoMoradia(Integer tempoMoradia) {
+        this.tempoMoradia = tempoMoradia;
     }
-
-    public Integer getAnosMoradia() {
-        return anosMoradia;
-    }
-
-    public void setAnosMoradia(Integer anosMoradia) {
-        this.anosMoradia = anosMoradia;
-    }
-
-    
 
     public String getPessoa_deficiente() {
         return pessoa_deficiente;
@@ -311,6 +303,30 @@ public class Pessoa implements java.io.Serializable {
 
     public void setAceitotermo(String aceitotermo) {
         this.aceitotermo = aceitotermo;
+    }
+
+    public String getTelefoneFixo() {
+        return telefoneFixo;
+    }
+
+    public void setTelefoneFixo(String telefoneFixo) {
+        this.telefoneFixo = telefoneFixo;
+    }
+
+    public String getTelefoneCelular() {
+        return telefoneCelular;
+    }
+
+    public void setTelefoneCelular(String telefoneCelular) {
+        this.telefoneCelular = telefoneCelular;
+    }
+
+    public String getTelefoneRecado() {
+        return telefoneRecado;
+    }
+
+    public void setTelefoneRecado(String telefoneRecado) {
+        this.telefoneRecado = telefoneRecado;
     }
 
     @Override

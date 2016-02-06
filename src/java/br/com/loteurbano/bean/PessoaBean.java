@@ -34,21 +34,24 @@ public class PessoaBean implements java.io.Serializable {
     }
 
     public String cadastar() throws Exception {
+        Pessoa pessoaigual = this.pessoaDao.comDadosIguais(pessoa);
 
-        try {
+        if (pessoaigual == null && !pessoaigual.equals(pessoa)) {
             pessoaDao.salvar(pessoa);
-            FacesMessage faces = new FacesMessage(" Seu cadastro foi realizado com Successo!");
-            FacesContext contexto = FacesContext.getCurrentInstance();
-            contexto.addMessage(null, faces);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Seu cadastro foi realizado com sucesso!", ""));
             return "index.xhtml";
 
-        } catch (Exception e) {
-            
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "CPF já cadastrado!", "Contact admin."));
-            return "index.xhtml";
-            
+        } else {
+            try {
+                System.out.println("Entrou no if");
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "CPF já cadastrado", ""));
+                return "index.xhtml";
+
+            } catch (Exception e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao efetuar o cadastro, tente novamente mais tarde", ""));
+                return "index.xhtml";
+            }
         }
-
     }
 
     public void validarCptcha() {
