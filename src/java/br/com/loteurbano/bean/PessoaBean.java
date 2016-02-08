@@ -7,10 +7,13 @@ package br.com.loteurbano.bean;
 
 import br.com.loteurbano.dao.PessoaDao;
 import br.com.loteurbano.entity.Pessoa;
+import br.com.loteurbano.util.HibernateUtil;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.hibernate.Session;
 
 /**
  *
@@ -22,10 +25,12 @@ public class PessoaBean implements java.io.Serializable {
 
     Pessoa pessoa;
     PessoaDao pessoaDao = new PessoaDao();
+    private Session session;
 
     public PessoaBean() {
 
         pessoa = new Pessoa();
+
     }
 
     public String startAdd() {
@@ -34,23 +39,25 @@ public class PessoaBean implements java.io.Serializable {
     }
 
     public String cadastar() throws Exception {
-        Pessoa pessoaigual = this.pessoaDao.comDadosIguais(pessoa);
 
-        if (pessoaigual == null && !pessoaigual.equals(pessoa)) {
+        session = HibernateUtil.getSessionFactory().openSession();
+
+        String hql_1 = "from Pessoa c where c.cpf = :cpf";
+        String hql_2 = "from Pessoa c where c.cpf_conjuge = :cpf_conjuge";
+
+        List result = session.createQuery(hql_1).setParameter("cpf", pessoa.getCpf()).list();
+        List result2 = session.createQuery(hql_2).setParameter("cpf_conjuge", pessoa.getCpf()).list();
+
+        if ((result.size() > 0 || result2.size() > 0) ) {
+            session.close();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "CPF já cadastrado", ""));
+            return "index.xhtml";
+        } else {
             pessoaDao.salvar(pessoa);
+            session.close();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Seu cadastro foi realizado com sucesso!", ""));
             return "index.xhtml";
 
-        } else {
-            try {
-                System.out.println("Entrou no if");
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "CPF já cadastrado", ""));
-                return "index.xhtml";
-
-            } catch (Exception e) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao efetuar o cadastro, tente novamente mais tarde", ""));
-                return "index.xhtml";
-            }
         }
     }
 

@@ -68,9 +68,7 @@ public class PessoaDao {
          
         return (Pessoa) this.session.createCriteria(Pessoa.class)
                 .add(Restrictions.eq("cpf", pessoa.getCpf()))
-                .add(Restrictions.eq("cpf_conjuge", pessoa.getCpf_conjuge()))
-                
-                .uniqueResult();
+                .list();
 
     }
 
