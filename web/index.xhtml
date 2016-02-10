@@ -10,40 +10,34 @@
     xmlns:b="http://bootsfaces.net/ui">
 
     <ui:define name="content">
-
-
         <h:form>
-            <p:ajaxStatus onstart="PF('statusDialog').show()" />
-            <p:dialog modal="false" widgetVar="statusDialog"   draggable="false" closable="false"  >
-                <p:graphicImage library="imagens" name="carregando.gif"  />
-            </p:dialog>
-
             <p:panel >
 
                 <p align="center"> <img src="resources/fotos/LOGO_OFICIAL_PMJM.jpg" width="360" height="180" alt="LOGO_OFICIAL_PMJM"/></p>
 
                 <b:well>
                     <h3><p align="center" >
-                            Pesquisa de Interesse de Lote Urbano<p/>
+                            Cadastro de Interesse de Lote Urbano<p/>
                         </p></h3>
-
-
-
-
-
 
                     <h4> <p align="center" > <p:commandButton value="Iniciar Cadastro" 
                                                               action="#{pessoaBean.startAdd}" style="background-color: darkcyan;color: #ffffff;
                                                               font-size: larger;" />
                         </p></h4><br/><br/>
 
-                    <p:messages id="messages" style="font-size: larger;" />
+                    <p:messages id="messages" style="font-size: larger; width: 100%" />
 
                 </b:well>
 
-                
+                <p:ajaxStatus onstart="PF('statusDialog').show()" />
+                <p:dialog modal="false" widgetVar="statusDialog"   draggable="false" closable="false"  >
+                    <p:graphicImage library="imagens" name="carregando_1.gif"  />
+                </p:dialog>
+
             </p:panel>
+
         </h:form>
+
     </ui:define>
 
 </ui:composition>

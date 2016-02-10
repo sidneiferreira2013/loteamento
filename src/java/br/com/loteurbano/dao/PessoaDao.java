@@ -7,12 +7,8 @@ package br.com.loteurbano.dao;
 
 import br.com.loteurbano.entity.Pessoa;
 import br.com.loteurbano.util.HibernateUtil;
-import java.util.List;
 import javax.persistence.PersistenceException;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -63,14 +59,7 @@ public class PessoaDao {
         }
     }
 
-    public Pessoa comDadosIguais(Pessoa pessoa) {
-         session = HibernateUtil.getSessionFactory().openSession();
-         
-        return (Pessoa) this.session.createCriteria(Pessoa.class)
-                .add(Restrictions.eq("cpf", pessoa.getCpf()))
-                .list();
-
-    }
+   
 
     public void excluir(Pessoa ps) {
         session = HibernateUtil.getSessionFactory().openSession();

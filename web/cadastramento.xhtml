@@ -7,347 +7,393 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:b="http://bootsfaces.net/ui">
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions">
 
 
 
     <ui:define name="content">
+        <h:form>
 
 
 
+            <script>
+                function apenasTexto(e)
+                {
+                    var expressao;
 
-        <script>
-            function mascara(o, f) {
-                v_obj = o
-                v_fun = f
-                setTimeout("execmascara()", 1)
-            }
-            function execmascara() {
-                v_obj.value = v_fun(v_obj.value)
-            }
+                    expressao = /[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ. ]/;
 
+                    if (expressao.test(String.fromCharCode(e.keyCode)))
+                    {
+                        return true;
+                    } else
+                    {
+                        return false;
+                    }
+                }
 
-            function moeda(v) {
-                v = v.replace(/\D/g, ""); // permite digitar apenas numero 
-                v = v.replace(/(\d{1})(\d{15})$/, "$1.$2") // coloca ponto antes dos ultimos digitos 
-                v = v.replace(/(\d{1})(\d{11})$/, "$1.$2") // coloca ponto antes dos ultimos 11 digitos 
-                v = v.replace(/(\d{1})(\d{8})$/, "$1.$2") // coloca ponto antes dos ultimos 8 digitos 
-                v = v.replace(/(\d{1})(\d{5})$/, "$1.$2") // coloca ponto antes dos ultimos 5 digitos 
-                v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2") // coloca virgula antes dos ultimos 2 digitos 
-                return v;
-            }
-        </script>
-        <script>
+            </script>
 
-            $(function () {
-                //recebera sómente numeros
-                $('#telefone').mask('(99) 9999-9999');
 
-                //recebera somente numeros com a respectiva regra
-                $('#cpf').mask('999.999.999-99');
-                $('#cep').mask('99999-999');
 
-                //recebera sómente letras max 8 digitos
-                $('#nome').mask('aaaaaaaa');
+            <script>
+                function mascara(o, f) {
+                    v_obj = o
+                    v_fun = f
+                    setTimeout("execmascara()", 1)
+                }
+                function execmascara() {
+                    v_obj.value = v_fun(v_obj.value)
+                }
 
-                //recebera letras e numeros e no maximo 8 digitos           
-                $('#apelido').mask('********');
-            });
 
-        </script>
+                function moeda(v) {
+                    v = v.replace(/\D/g, ""); // permite digitar apenas numero 
+                    v = v.replace(/(\d{1})(\d{15})$/, "$1.$2") // coloca ponto antes dos ultimos digitos 
+                    v = v.replace(/(\d{1})(\d{11})$/, "$1.$2") // coloca ponto antes dos ultimos 11 digitos 
+                    v = v.replace(/(\d{1})(\d{8})$/, "$1.$2") // coloca ponto antes dos ultimos 8 digitos 
+                    v = v.replace(/(\d{1})(\d{5})$/, "$1.$2") // coloca ponto antes dos ultimos 5 digitos 
+                    v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2") // coloca virgula antes dos ultimos 2 digitos 
+                    return v;
+                }
+            </script>
+            <script>
 
+                $(function () {
+                    //recebera sómente numeros
+                    $('#telefone').mask('(99) 9999-9999');
 
+                    //recebera somente numeros com a respectiva regra
+                    $('#cpf').mask('999.999.999-99');
+                    $('#cep').mask('99999-999');
 
-        <p:growl id="growl" />  
+                    //recebera sómente letras max 8 digitos
+                    $('#nome').mask('aaaaaaaa');
 
-        <p:fieldset legend="FORMULÁRIO DE CADASTRO" style="font-size: medium; color: #000000; margin-left: 30px; margin-right: 30px; " >
+                    //recebera letras e numeros e no maximo 8 digitos           
+                    $('#apelido').mask('********');
+                });
 
+            </script>
 
-            <h:panelGrid columns="4" cellpadding="4"  >
 
-                <p:outputLabel for="nome" value="Nome" style="font-size: large"/>
-                <p:inputText id="nome" label="nome"  value="#{pessoaBean.pessoa.nome}" 
-                             size="30" autocomplete="true" required="true" requiredMessage="Campo nome não peenchido" />
 
+            <p:growl id="growl"  autoUpdate="true" />  
 
-                <p:outputLabel for="rg" value="RG"  style="font-size: large"/>
-                <p:inputMask id="rg" label="rg" mask="99.999.999-9"
-                             value="#{pessoaBean.pessoa.rg}" size="12"
-                             required="true" requiredMessage="Campo RG não preenchido"  >
-                </p:inputMask>
 
-                <p:outputLabel for="cpf" value="CPF" style="font-size: large" />
-                <p:inputMask id="cpf" label="cpf" mask="999.999.999-99"
-                             value="#{pessoaBean.pessoa.cpf}" requiredMessage="Campo CPF não preenchido" 
-                             size="14" required="true">
-                </p:inputMask>
+            <p:fieldset legend="FORMULÁRIO DE CADASTRO" style="font-size: medium; color: #000000; margin-left: 30px; margin-right: 30px; "  >
 
-                <p:outputLabel for="datanascimento" value="Dt.Nasc."  style="font-size: large"/>
-                <p:inputMask id="datanascimento" mask="99/99/9999"  value="#{pessoaBean.pessoa.dt_nasc}" required="true"
-                             size="9" styleClass="fctValidaData" requiredMessage="Campo Data de Nascimento não preenchido" />
 
-                <p:outputLabel value="Sexo" for="sexo" style="font-size: large" />
-                <h:selectOneMenu id="sexo"  value="#{pessoaBean.pessoa.sexo}"
-                                 required="true" requiredMessage="Sexo não selecionado!" >
-                    <f:selectItem itemLabel="Selecione" itemValue=""  />
-                    <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-                    <f:selectItem itemLabel="Ferminino" itemValue="Ferminino" />
-                </h:selectOneMenu>
+                <h:panelGrid columns="4" cellpadding="4"   >
 
+                    <p:outputLabel for="nome" value="Nome" style="font-size: large"/>
+                    <p:inputText id="nome" label="nome"  value="#{pessoaBean.pessoa.nome}" onkeypress="return apenasTexto(event)"
+                                 size="30" autocomplete="true" required="true" requiredMessage="Campo nome não peenchido" >
 
-                <p:outputLabel for="titulo_eleitor" value="Título de Eleitor" style="font-size: large" />
-                <p:inputMask mask="999999999999" id="titulo_eleitor" value="#{pessoaBean.pessoa.t_eleitor}" 
-                             required="true" requiredMessage="Campo Titulo de Eleitor não preenchido"    >
-                </p:inputMask>
+                    </p:inputText>
 
-                <p:outputLabel for="zona_eleitoral" value="Zona Eleitoral"  style="font-size: large"/>
-                <p:inputText id="zona_eleitoral" required="true" value="#{pessoaBean.pessoa.z_eleitoral}"
-                             size="6" requiredMessage="Campo Zona Eleitoral não preenchido" maxlength="3" >
-                </p:inputText>
 
-            </h:panelGrid>
-            <br/>
+                    <p:outputLabel for="rg" value="R.G."  style="font-size: large"/>
+                    <p:inputText id="rg" label="rg" 
+                                 value="#{pessoaBean.pessoa.rg}" size="12" maxlength="12"   
+                                 required="true" requiredMessage="Campo RG não preenchido"  >
+                    </p:inputText>
 
+                    <p:outputLabel for="cpf" value="CPF" style="font-size: large" />
+                    <p:inputMask id="cpf" label="cpf" mask="999.999.999-99"
+                                 value="#{pessoaBean.pessoa.cpf}" requiredMessage="Campo CPF não preenchido" 
+                                 size="14" required="true">
+                    </p:inputMask>
 
-            <h:panelGrid columns="4" cellpadding="4">
+                    <p:outputLabel for="datanascimento" value="Data.Nasc."  style="font-size: large"/>
+                    <p:inputMask id="datanascimento" mask="99/99/9999"  value="#{pessoaBean.pessoa.dt_nasc}" required="true"
+                                 size="9" styleClass="fctValidaData" requiredMessage="Campo Data de Nascimento não preenchido" />
 
-                <p:outputLabel value="Estado Civil" for="estadoCivil"/>
-                <h:selectOneMenu id="estadoCivil"  value="#{pessoaBean.pessoa.estado_civil}"
-                                 required="true"  requiredMessage="Estado civil não selecionado!">
+                    <p:outputLabel value="Sexo" for="sexo" style="font-size: large" />
+                    <h:selectOneMenu id="sexo"  value="#{pessoaBean.pessoa.sexo}"
+                                     required="true" requiredMessage="Sexo não selecionado!" >
+                        <f:selectItem itemLabel="Selecione" itemValue=""  />
+                        <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                        <f:selectItem itemLabel="Feminino" itemValue="Ferminino" />
+                    </h:selectOneMenu>
 
-                    <f:selectItem itemLabel="Selecione" itemValue=""  />
-                    <f:selectItem itemLabel="Solteiro(a)" itemValue="Solteiro(a)" />
-                    <f:selectItem itemLabel="Casado(a)" itemValue="Casado(a)" />
-                    <f:selectItem itemLabel="Separado(a)" itemValue="Separado(a)" />
-                    <f:selectItem itemLabel="Divorciado(a)" itemValue="Divorciado(a)" />
-                    <f:selectItem itemLabel="Amasiado(a)" itemValue="Amasiado(a)" />
-                </h:selectOneMenu>
 
-            </h:panelGrid>
+                    <p:outputLabel for="titulo_eleitor" value="Título de Eleitor" style="font-size: large" />
+                    <p:inputMask mask="999999999999" id="titulo_eleitor" value="#{pessoaBean.pessoa.t_eleitor}" 
+                                 required="true" requiredMessage="Campo Titulo de Eleitor não preenchido"    >
+                    </p:inputMask>
 
+                    <p:outputLabel for="zona_eleitoral" value="Zona Eleitoral"  style="font-size: large"/>
+                    <p:inputText id="zona_eleitoral" required="true" value="#{pessoaBean.pessoa.z_eleitoral}"
+                                 size="6" requiredMessage="Campo Zona Eleitoral não preenchido" maxlength="3" >
+                    </p:inputText>
 
+                </h:panelGrid>
+                <br/>
 
-            <h3>Dados do companheiro(a) </h3><p/>
 
-            <p style="color: #D20005">Caso nã tenha compaheiro(a), deixar em branco</p>
+                <h:panelGrid columns="4" cellpadding="4" style="font-size: large; page-break-after: ">
 
-            <h:panelGrid columns="4" cellpadding="4" >
+                    <p:outputLabel value="Estado Civil" for="estadoCivil"/>
+                    <h:selectOneMenu id="estadoCivil"  value="#{pessoaBean.pessoa.estado_civil}"
+                                     required="true"  requiredMessage="Estado civil não selecionado!">
 
-                <p:outputLabel for="nome_companheira" value="Nome" style="font-size: large; page-break-after: " />
+                        <f:selectItem itemLabel="Selecione" itemValue=""  />
+                        <f:selectItem itemLabel="Solteiro(a)" itemValue="Solteiro(a)" />
+                        <f:selectItem itemLabel="Casado(a)" itemValue="Casado(a)" />
+                        <f:selectItem itemLabel="Divorciado(a)" itemValue="Divorciado(a)" />
+                        <f:selectItem itemLabel="Não-casado(a), porém vive junto" itemValue="Amasiado(a)" />
+                    </h:selectOneMenu>
 
-                <p:inputText id="nome_companheira" label="nome_compaheira"  value="#{pessoaBean.pessoa.n_conjuge}"
-                             size="30" autocomplete="true"   />
+                </h:panelGrid>
 
-                <p:outputLabel for="rg_companheira" value="RG"  style="font-size: large"/>
-                <p:inputMask id="rg_companheira" label="rg" mask="99.999.999-9"
-                             value="#{pessoaBean.pessoa.rg_conjuge}" size="12">
-                </p:inputMask>
 
-                <p:outputLabel for="cpf_companheira" value="CPF" style="font-size: large" />
-                <p:inputMask id="cpf_companheira" label="cpf" mask="999.999.999-99"
-                             value="#{pessoaBean.pessoa.cpf_conjuge}" size="14" >
-                </p:inputMask>
 
-                <p:outputLabel for="datanascimento_companheira" value="Dt.Nasc."  style="font-size: large"/>
-                <p:inputMask id="datanascimento_companheira" mask="99/99/9999"  
-                             value="#{pessoaBean.pessoa.dtNasc_conjugue}" 
-                             requiredMessage="Campo Dt. Nascimento  não preenchido ou inválido!" size="9"/>
+                <h3>Dados do companheiro(a) </h3><p/>
 
-                <p:outputLabel value="Sexo" for="sexo_companheira" style="font-size: large" />
-                <h:selectOneMenu id="sexo_companheira"  value="#{pessoaBean.pessoa.sexo_conjuge}">
+                <p style="color: #D20005">Caso não tenha companheiro(a), deixar em branco</p>
 
-                    <f:selectItem itemLabel="Selecione" itemValue=""  />
-                    <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-                    <f:selectItem itemLabel="Ferminino" itemValue="Ferminino" />
+                <h:panelGrid columns="4" cellpadding="4"  >
 
-                </h:selectOneMenu>
+                    <p:outputLabel for="nome_companheira" value="Nome" style="font-size: large; page-break-after: " />
 
+                    <p:inputText id="nome_companheira" label="nome_compaheira"  value="#{pessoaBean.pessoa.n_conjuge}"
+                                 size="30" autocomplete="true" onkeypress="return apenasTexto(event)"  />
 
+                    <p:outputLabel for="rg_companheira" value="R.G."  style="font-size: large"/>
+                    <p:inputText id="rg_companheira" label="rg"  maxlength="12"
+                                 value="#{pessoaBean.pessoa.rg_conjuge}" size="12" />
 
 
-                <p:outputLabel for="titulo_eleitor2" value="Título de Eleitor" style="font-size: large" />
-                <p:inputMask mask="999999999999" id="titulo_eleitor2" value="#{pessoaBean.pessoa.t_eleitor_conjuge}" 
-                             >
-                </p:inputMask>
+                    <p:outputLabel for="cpf_companheira" value="CPF" style="font-size: large" />
+                    <p:inputMask id="cpf_companheira" label="cpf" mask="999.999.999-99"
+                                 value="#{pessoaBean.pessoa.cpf_conjuge}" size="14" >
+                    </p:inputMask>
 
-                <p:outputLabel for="zona_eleitoral2" value="Zona Eleitoral"  style="font-size: large"/>
-                <p:inputText id="zona_eleitoral2"  value="#{pessoaBean.pessoa.z_eleitoral_conjuge}"
-                             size="6"  maxlength="3" >
-                </p:inputText>
+                    <p:outputLabel for="datanascimento_companheira" value="Data.Nasc."  style="font-size: large"/>
+                    <p:inputMask id="datanascimento_companheira" mask="99/99/9999"  
+                                 value="#{pessoaBean.pessoa.dtNasc_conjugue}" 
+                                 requiredMessage="Campo Data nascimento  não preenchido ou inválido!" size="9"/>
 
+                    <p:outputLabel value="Sexo" for="sexo_companheira" style="font-size: large" />
+                    <h:selectOneMenu id="sexo_companheira"  value="#{pessoaBean.pessoa.sexo_conjuge}">
 
-            </h:panelGrid>
+                        <f:selectItem itemLabel="Selecione" itemValue=""  />
+                        <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                        <f:selectItem itemLabel="Feminino" itemValue="Ferminino" />
 
-            <h3>Endereço atual</h3><p/>
+                    </h:selectOneMenu>
 
-            <h:panelGrid columns="4" cellpadding="4" >
 
-                <p:outputLabel value="Rua"  style="font-size: large" />
-                <p:inputText size="30" value="#{pessoaBean.pessoa.logradouro}"  onkeypress="mascara(this, execmascara);"
-                             requiredMessage="Compo Rua não preenchido"/>
 
 
-                <p:outputLabel value="N°:"  style="font-size: large"/>
-                <p:inputText size="4" value="#{pessoaBean.pessoa.numero}"
-                             requiredMessage="Compo Nº não preenchido" />
+                    <p:outputLabel for="titulo_eleitor2" value="Título de Eleitor" style="font-size: large" />
+                    <p:inputMask mask="999999999999" id="titulo_eleitor2" value="#{pessoaBean.pessoa.t_eleitor_conjuge}" 
+                                 >
+                    </p:inputMask>
 
-                <p:outputLabel for="complemento" value="Complemento:"  style="font-size: large"/>
-                <p:inputText id="complemento" size="12" value="#{pessoaBean.pessoa.complemento}" />
+                    <p:outputLabel for="zona_eleitoral2" value="Zona Eleitoral"  style="font-size: large"/>
+                    <p:inputText id="zona_eleitoral2"  value="#{pessoaBean.pessoa.z_eleitoral_conjuge}"
+                                 size="6"  maxlength="3" >
+                    </p:inputText>
 
 
-                <p:outputLabel value="Bairro:"  style="font-size: large"/>
-                <p:inputText size="18" value="#{pessoaBean.pessoa.bairro}"
-                             requiredMessage="Compo Bairro não preenchido" />
+                </h:panelGrid>
 
+                <h3>Endereço atual</h3><p/>
 
-                <p:outputLabel value="Cidade:"  style="font-size: large"/>
-                <p:inputText size="20" value="#{pessoaBean.pessoa.cidade}" 
-                             requiredMessage="Compo Cidade não preenchido"/>
+                <h:panelGrid columns="4" cellpadding="4" >
 
+                    <p:outputLabel value="Rua"  style="font-size: large" />
+                    <p:inputText size="30" value="#{pessoaBean.pessoa.logradouro}" required="true" 
+                                 requiredMessage="Compo Rua não preenchido" onkeypress="return apenasTexto(event)" />
 
-                <p:outputLabel value="Estado"  style="font-size: large"/>
-                <p:inputMask mask="SP" size="2" value="#{pessoaBean.pessoa.estado}" requiredMessage="Compo Estado não preenchido" />
 
-                <p:outputLabel for="cep" value="CEP:"  style="font-size: large"/>
-                <p:inputMask id="cep" mask="99999-999" value="#{pessoaBean.pessoa.cep}"  size="7" 
-                             requiredMessage="Compo Cep não preenchido">
-                    <p:ajax listener="#{pessoaFisicaBean.encontraCEP}"  event="change"  process="@this"/>
-                </p:inputMask>
-            </h:panelGrid>
+                    <p:outputLabel value="N°"  style="font-size: large"/>
+                    <p:inputText size="4" value="#{pessoaBean.pessoa.numero}" required="true"
+                                 requiredMessage="Compo Nº não preenchido" />
 
+                    <p:outputLabel for="complemento" value="Complemento"  style="font-size: large"/>
+                    <p:inputText id="complemento" size="12" value="#{pessoaBean.pessoa.complemento}" placeholder="Ex. Fundo "  />
 
-            <br/>
 
-            <h:panelGrid  columns="2" cellpadding="4" style="font-size: large" >
+                    <p:outputLabel value="Bairro"  style="font-size: large"/>
+                    <p:inputText size="18" value="#{pessoaBean.pessoa.bairro}" required="true"
+                                 requiredMessage="Compo Bairro não preenchido" />
 
 
+                    <p:outputLabel value="Cidade"  style="font-size: large"/>
+                    <p:inputText size="20" value="#{pessoaBean.pessoa.cidade}" onkeypress="return apenasTexto(event)"
+                                 requiredMessage="Compo Cidade não preenchido" required="true" />
 
-                <p:outputLabel for="telefone" value="Telefone fixo" />
-                <p:inputMask size="13" mask="(99) 9999-9999" id="telefone" value="#{pessoaBean.pessoa.telefoneFixo}" /> 
 
-                <p:outputLabel for="telefone2" value="Telefone celular" />
-                <p:inputMask size="13" mask="(99) 99999-9999" id="telefone2"  requiredMessage="Telefone Celular não preenchido"
-                             value="#{pessoaBean.pessoa.telefoneCelular}" /> 
+                    <p:outputLabel value="Estado"  style="font-size: large"/>
+                    <p:inputMask mask="aa" size="2" value="#{pessoaBean.pessoa.estado}" required="true"
+                                 requiredMessage="Compo Estado não preenchido" />
 
-                <p:outputLabel for="telefone3" value="Telefone recado" />
-                <p:inputMask size="13" mask="(99) 99999-9999" id="telefone3" value="#{pessoaBean.pessoa.telefoneRecado}" /> 
+                    <p:outputLabel for="cep" value="CEP"  style="font-size: large"/>
+                    <p:inputMask id="cep" mask="99999-999" value="#{pessoaBean.pessoa.cep}"  size="7" required="true"
+                                 requiredMessage="Compo Cep não preenchido">
+                        <p:ajax listener="#{pessoaFisicaBean.encontraCEP}"  event="change"  process="@this"/>
+                    </p:inputMask>
+                </h:panelGrid>
 
 
-            </h:panelGrid>
+                <br/>
 
-            <br/>
+                <h:panelGrid  columns="2" cellpadding="4" style="font-size: large" >
 
-            <h:panelGrid columns="2" cellpadding="4" style="font-size: large" >
 
-                <p:outputLabel for="moradiaAtual" value="Situação de moradia atual" />
-                <h:selectOneMenu id="moradiaAtual"  value="#{pessoaBean.pessoa.sit_moradia}"  style="width:320px;"
-                                 requiredMessage="Tipo de moradia não selecionado!" >
 
-                    <f:selectItem itemLabel="Selecione" itemValue=""  />
-                    <f:selectItem itemLabel="Mora de aluguel" itemValue="Mora de aluguel" />
-                    <f:selectItem itemLabel="Mora em casa cedida" itemValue="Mora em casa cedida" />
-                    <f:selectItem itemLabel="Mora em casa própria" itemValue="Mora em casa própria" />
-                    <f:selectItem itemLabel="Mora com os pais ou parentes" itemValue="Mora com os pais ou parentes" />
-                    <f:selectItem itemLabel="Mora em casa contruida no terreno dois pais ou parentes"
-                                  itemValue="Mora em casa contruida no terreno dois pais ou parentes" />
+                    <p:outputLabel for="telefone" value="Telefone fixo" />
+                    <p:inputMask size="13" mask="(99) 9999-9999" id="telefone" value="#{pessoaBean.pessoa.telefoneFixo}" /> 
 
-                </h:selectOneMenu>
+                    <p:outputLabel for="telefone2" value="Telefone celular" />
+                    <p:inputMask size="13" mask="(99) 99999-9999" id="telefone2" 
+                                 value="#{pessoaBean.pessoa.telefoneCelular}" /> 
 
+                    <p:outputLabel for="telefone3" value="Telefone recado fixo" />
+                    <p:inputMask size="13" mask="(99) 99999-999" id="telefone3" value="#{pessoaBean.pessoa.telefoneRecado}" />
 
+                    <p:outputLabel for="telefone4" value="Telefone recado celular" />
+                    <p:inputMask size="13" mask="(99) 99999-9999" id="telefone4" value="#{pessoaBean.pessoa.telefoneRecadoCelular}" /> 
 
 
-            </h:panelGrid><br/>
+                </h:panelGrid>
 
-            <h:panelGrid columns="2" cellpadding="4" style="font-size: large">
+                <br/>
 
-                <p:outputLabel for="pessoas" value="Quantas pessoas moram atualmente na casa ?" />
-                <p:inputText id="pessoas" size="2" maxlength="2" style="width: 50px" />
+                <h:panelGrid columns="2" cellpadding="4" style="font-size: large" >
 
-                <p:outputLabel for="filhos" value="Quando filhos você tem ?" />
-                <p:inputText id="filhos"  maxlength="2" style="width: 50px" />
+                    <p:outputLabel for="moradiaAtual" value="Situação de moradia atual" />
+                    <h:selectOneMenu id="moradiaAtual"  value="#{pessoaBean.pessoa.sit_moradia}"  style="width:320px;"
+                                     requiredMessage="Tipo de moradia não selecionado!" required="true">
 
-                <p:outputLabel for="anos" value="Quantos anos mora em Júlio Mesquita?" />
-                <p:inputText id="anos"  style="width: 50px" maxlength="2" value="#{pessoaBean.pessoa.tempoMoradia}"
-                             requiredMessage="Compo Quantos anos mora em Júlio Mesquita não preenchido" />
+                        <f:selectItem itemLabel="Selecione" itemValue=""  />
+                        <f:selectItem itemLabel="Mora de aluguel" itemValue="Mora de aluguel" />
+                        <f:selectItem itemLabel="Mora em casa cedida" itemValue="Mora em casa cedida" />
+                        <f:selectItem itemLabel="Mora em casa própria" itemValue="Mora em casa própria" />
+                        <f:selectItem itemLabel="Mora com os pais ou parentes" itemValue="Mora com os pais ou parentes" />
+                        <f:selectItem itemLabel="Mora em casa construída no terreno dois pais ou parentes"
+                                      itemValue="Mora em casa construída no terreno dois pais ou parentes" />
 
+                    </h:selectOneMenu>
 
-                <p:outputLabel value="Valor da renda familiar" for="renda" />
-                <p:inputText id="renda" size="7" value="#{pessoaBean.pessoa.rendaFamiliar}" onkeypress="mascara(this, moeda);"
-                             maxlength="9" requiredMessage="Campo renda familar não preenchido">
 
-                    <f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"  pattern="#,##0.00"  />
 
-                </p:inputText>
 
-                <p:outputLabel value="Possui pessoa deficiente na família ?" for="deficiencia" />
-                <p:selectOneRadio value="#{pessoaBean.pessoa.pessoa_deficiente}" id="deficiencia" 
-                                  rendered="true" layout="pageDirection"   requiredMessage="Compo deficiente na familia não preenchido" >
-                    <f:selectItem itemLabel="Não" itemValue="Nao  " />
-                    <f:selectItem itemLabel="Sim" itemValue="Sim " />
+                </h:panelGrid><br/>
 
-                </p:selectOneRadio>
-            </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="4" style="font-size: large">
 
+                    <p:outputLabel for="pessoas" value="Quantas pessoas moram atualmente na casa?" />
+                    <p:inputText id="pessoas" size="2" maxlength="2" style="width: 50px" required="true" />
 
+                    <p:outputLabel for="filhos" value="Quantos filhos você têm?" />
+                    <p:inputText id="filhos"  maxlength="2" style="width: 50px" required="true"
+                                 requiredMessage="Quantos filhos não preenchido, preencher 00 caso não tenha"/>
+
+                    <p:outputLabel for="anos" value="Quantos anos mora em Júlio Mesquita?" />
+                    <p:inputText id="anos"  style="width: 50px" maxlength="2" value="#{pessoaBean.pessoa.tempoMoradia}" required="true"
+                                 requiredMessage="Compo quantos anos mora em Júlio Mesquita não preenchido" />
+
+                </h:panelGrid>
+                
+                <br/>
+
+                <h:panelGrid columns="3" cellpadding="3" style="font-size: large">
+                    <p:outputLabel value="Valor da renda familiar" for="renda" />
+                    <p:inputText id="renda" size="7" value="#{pessoaBean.pessoa.rendaFamiliar}" onkeypress="mascara(this, moeda);" 
+                                 maxlength="9" requiredMessage="Campo renda familar não preenchido" required="true">
+
+                        <f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"  pattern="#,##0.00"  />
+                       
+                    </p:inputText>
+                    <p:outputLabel value=" A renda familiar é calculada somando-se a renda bruta dos componentes do grupo familiar."
+                                   style="font-size: small"/>
+                </h:panelGrid>
+                
+                
+                <h:panelGrid columns="2" cellpadding="4" style="font-size: large">
+                    <p:outputLabel value="Possui pessoa deficiente na família?" for="deficiencia" />
+                    <p:selectOneRadio value="#{pessoaBean.pessoa.pessoa_deficiente}" id="deficiencia" required="true"
+                                      rendered="true" layout="pageDirection"   requiredMessage="Compo deficiente na familia não preenchido" >
+                        <f:selectItem itemLabel="Não" itemValue="Nao  " />
+                        <f:selectItem itemLabel="Sim" itemValue="Sim " />
+
+                    </p:selectOneRadio>
+                </h:panelGrid>
+
+
+
+                <br/><br/>
+
+
+                <h:panelGrid style="font-size: large" columns="2" cellpadding="5">
+
+                    <p:outputLabel for="construcao" value="Em quanto tempo pretende iniciar a construção no terreno ?" 
+                                   style="margin-bottom:20px" />
+                    <h:selectOneMenu value="#{pessoaBean.pessoa.tempo_construção}" id="construcao" required="true"
+                                     requiredMessage="Selecione tempo de construção" >
+
+                        <f:selectItem itemLabel="Selecione" itemValue=""  />
+                        <f:selectItem itemLabel="Imediatamente" itemValue="Imediatamente"/>
+                        <f:selectItem itemLabel="2 meses" itemValue="2 meses"/>
+                        <f:selectItem itemLabel="4 meses" itemValue="4 meses"/>
+                        <f:selectItem itemLabel="6 meses" itemValue="6 meses"/>
+                        <f:selectItem itemLabel="8 meses" itemValue="8 meses"/>
+                        <f:selectItem itemLabel="10 meses" itemValue="10 meses"/>
+                        <f:selectItem itemLabel="1 ano" itemValue="1 ano"/>
+                        <f:selectItem itemLabel="2 anos" itemValue="2 anos"/>
+                        <f:selectItem itemLabel="Mais de 2 anos" itemValue="Mais de 2 anos"/>
+                        <f:selectItem itemLabel="Não sei" itemValue="Não sei"/>
+                    </h:selectOneMenu>
+
+
+                </h:panelGrid>
+
+                <br/><br/>
+
+                <h:panelGrid columns="2" cellpadding="4" style="font-size: large">
+
+                    <p:outputLabel value="Declaro que todas as informações contidas neste formulário são verdadeiras."
+                                   for="termo" />
+                    <p:selectOneRadio value="#{pessoaBean.pessoa.aceitotermo}" id="termo" required="true"
+                                      rendered="true" layout="pageDirection"  requiredMessage="Campo aceite do termo não marcado" >
+                        <f:selectItem itemLabel="" itemValue="Sim " />
+
+                    </p:selectOneRadio>
+                </h:panelGrid>
+
+                <br/><br/><br/>
+
+
+
+                <p:commandButton   value="Salvar" action="#{pessoaBean.cadastar}" 
+
+                                   style="color: #000000; background-color: #99ffcc;" icon="ui-icon-disk" update="@all" />
+
+                <p:commandButton value="Voltar" action="index" ajax="false" style="background: #ff6666"
+                                 immediate="true" icon="ui-icon-home"/>
+
+
+                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                <p:dialog modal="true" widgetVar="statusDialog"   draggable="false" closable="false"  >
+                    <p:graphicImage library="imagens" name="carregando_1.gif"  />
+                </p:dialog>
+
+
+            </p:fieldset>
 
             <br/><br/>
 
+            <div id="bottom" style="background-color: #ffffff; width: 100%" >
+                <ui:insert name="bottom">Copyright © 2016 Todos os direitos reservados. SIDWEB </ui:insert>
+            </div>
 
-            <h:panelGrid style="font-size: large" columns="2" cellpadding="5">
+        </h:form>
 
-                <p:outputLabel for="construcao" value="Em quanto tempo pretende iniciar a construção no terreno ?" 
-                               style="margin-bottom:20px" />
-                <h:selectOneMenu value="#{pessoaBean.pessoa.tempo_construção}" id="construcao" 
-                                 requiredMessage="Selecione tempo de construção" >
-
-                    <f:selectItem itemLabel="Selecione" itemValue=""  />
-                    <f:selectItem itemLabel="Imediato" itemValue="Imediato"/>
-                    <f:selectItem itemLabel="2 meses" itemValue="2 meses"/>
-                    <f:selectItem itemLabel="4 meses" itemValue="4 meses"/>
-                    <f:selectItem itemLabel="6 meses" itemValue="6 meses"/>
-                    <f:selectItem itemLabel="8 meses" itemValue="8 meses"/>
-                    <f:selectItem itemLabel="10 meses" itemValue="10 meses"/>
-                    <f:selectItem itemLabel="1 ano" itemValue="1 ano"/>
-                    <f:selectItem itemLabel="2 anos" itemValue="2 anos"/>
-                    <f:selectItem itemLabel="mais de 2 anos" itemValue="mais de 2 anos"/>
-                    <f:selectItem itemLabel="Não sei" itemValue="Não sei"/>
-                </h:selectOneMenu>
-
-
-            </h:panelGrid>
-
-            <br/><br/>
-
-            <h:panelGrid columns="2" cellpadding="4" style="font-size: large">
-
-                <p:outputLabel value="Declaro que todas as informações contidas nesse formulário são verdadeiras."
-                               for="termo" />
-                <p:selectOneRadio value="#{pessoaBean.pessoa.aceitotermo}" id="termo" 
-                                  rendered="true" layout="pageDirection"  requiredMessage="Campo aceite do termo não marcado" >
-                    <f:selectItem itemLabel="" itemValue="Sim " />
-
-                </p:selectOneRadio>
-            </h:panelGrid>
-
-            <br/><br/><br/>
-
-            <p:commandButton   value="Salvar" action="#{pessoaBean.cadastar}" 
-
-                               ajax="false" style="color: #D20005" icon="ui-icon-disk"/>
-
-            <p:commandButton value="Voltar" action="index" ajax="false"
-                             immediate="true" icon="ui-icon-home"/>
-
-
-
-        </p:fieldset>
-
-        <br/><br/>
-
-
-        <div id="bottom" style="background-color: #ffffff; width: 100%" >
-            <ui:insert name="bottom">Copyright © 2016 Todos os direitos reservados. WEB JEY SISTEMAS </ui:insert>
-        </div>
     </ui:define>
 
 

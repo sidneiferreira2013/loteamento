@@ -28,9 +28,7 @@ public class PessoaBean implements java.io.Serializable {
     private Session session;
 
     public PessoaBean() {
-
         pessoa = new Pessoa();
-
     }
 
     public String startAdd() {
@@ -48,7 +46,7 @@ public class PessoaBean implements java.io.Serializable {
         List result = session.createQuery(hql_1).setParameter("cpf", pessoa.getCpf()).list();
         List result2 = session.createQuery(hql_2).setParameter("cpf_conjuge", pessoa.getCpf()).list();
 
-        if ((result.size() > 0 || result2.size() > 0) ) {
+        if ((result.size() > 0 || result2.size() > 0)) {
             session.close();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "CPF já cadastrado", ""));
             return "index.xhtml";

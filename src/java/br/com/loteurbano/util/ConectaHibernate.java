@@ -14,21 +14,12 @@ import javax.faces.context.FacesContext;
 public class ConectaHibernate {
 
     public static void main(String[] args) {
-
-        Pessoa pessoa = new Pessoa();
-        PessoaDao pessoaDao = new PessoaDao();
-
-        Pessoa pessoaIgual = pessoaDao.comDadosIguais(pessoa);
-
-        System.out.println(pessoaIgual);
-
-        if (pessoaIgual != null && !pessoaIgual.equals(pessoa)) {
-
-            System.out.println(pessoaIgual);
-
-        } else {
-
-            System.out.println(pessoaIgual);
+        Session sessao = null;
+        try {
+            sessao = HibernateUtil.getSessionFactory().openSession();
+            System.out.println("Conectou!!");
+        } finally{
+            sessao.close();
         }
     }
 

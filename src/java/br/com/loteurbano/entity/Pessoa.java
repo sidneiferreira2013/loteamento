@@ -43,7 +43,7 @@ public class Pessoa implements java.io.Serializable {
     private String rg_conjuge;
 
     private String cpf_conjuge;
-    private Integer t_eleitor_conjuge;
+    private Double t_eleitor_conjuge;
     private Integer z_eleitoral_conjuge;
 
     private String logradouro;
@@ -72,6 +72,7 @@ public class Pessoa implements java.io.Serializable {
     private String telefoneFixo;
     private String telefoneCelular;
     private String telefoneRecado;
+    private String telefoneRecadoCelular;
 
     public long getId() {
         return id;
@@ -177,11 +178,11 @@ public class Pessoa implements java.io.Serializable {
         this.cpf_conjuge = cpf_conjuge;
     }
 
-    public Integer getT_eleitor_conjuge() {
+    public Double getT_eleitor_conjuge() {
         return t_eleitor_conjuge;
     }
 
-    public void setT_eleitor_conjuge(Integer t_eleitor_conjuge) {
+    public void setT_eleitor_conjuge(Double t_eleitor_conjuge) {
         this.t_eleitor_conjuge = t_eleitor_conjuge;
     }
 
@@ -328,6 +329,15 @@ public class Pessoa implements java.io.Serializable {
     public void setTelefoneRecado(String telefoneRecado) {
         this.telefoneRecado = telefoneRecado;
     }
+
+    public String getTelefoneRecadoCelular() {
+        return telefoneRecadoCelular;
+    }
+
+    public void setTelefoneRecadoCelular(String telefoneRecadoCelular) {
+        this.telefoneRecadoCelular = telefoneRecadoCelular;
+    }
+    
 
     @Override
     public int hashCode() {
